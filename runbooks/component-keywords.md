@@ -34,9 +34,25 @@
   2. Expected to include
   3. Timed out retrying
   4. Expected to find content
+  5. expected '0' to include '1'
+  6. command exited with a non-zero code
 #### System issue
   1. Timed out retrying
   2. `cy.click()` failed
+  3. before all. that means dependent package not be installed
+
+### ALC
+### Product bug
+
+### Automation bug
+  1. before all. that means dependent package not be installed
+  2. Expected to find element
+  3. Expected to find content 
+  4. command exited with a non-zero code
+### System issue
+  1. Timed out retrying
+
+
 
 
 
