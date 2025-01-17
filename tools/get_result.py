@@ -49,13 +49,21 @@ def get_case_error_msg(url):
          if error_content:
               error_soup = parse_webpage(error_content)
               error_elements = error_soup.find_all('pre', style='display: ', id=lambda x: x and '-error' in x)
-              #print(error_elements)
-              for pre_tag in error_elements:
+              if error_elements:
+                for pre_tag in error_elements:
                    error_text = pre_tag.get_text(strip=True)
                    pattern = r'RHACM4K_\d+'
                    match = re.search(pattern, real_id)
                    if match:
                      results.append((match.group(), error_text))
+              else:
+               stacktrace_elements = error_soup.find_all('pre', id=lambda x: x and '-stacktrace' in x)
+               for pre_tag_s in stacktrace_elements:
+                   error_text = pre_tag_s.get_text(strip=True)
+                   pattern = r'RHACM4K_\d+'
+                   match = re.search(pattern, real_id)
+                   if match:
+                      results.append((match.group(), error_text))
        # print and return results
         for real_id, error_text in results:
             case_id = re.sub(r'_', '-', real_id)
