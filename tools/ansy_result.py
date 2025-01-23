@@ -4,4 +4,4 @@ urlpath = 'https://jenkins-csb-rhacm-tests.dno.corp.redhat.com/view/Global%20Hub
 #urlpath = 'https://jenkins-csb-rhacm-tests.dno.corp.redhat.com/job/qe-acm-automation-poc/job/grc-e2e-test-execution/2169/testReport'
 #urlpath = 'https://jenkins-csb-rhacm-tests.dno.corp.redhat.com/job/qe-acm-automation-poc/job/server_foundation_e2e_tests/695/testReport/'
 #urlpath = 'https://jenkins-csb-rhacm-tests.dno.corp.redhat.com/job/qe-acm-automation-poc/job/obs_e2e_test_execution/1221/testReport/'
-results = get_result.get_case_error_msg(urlpath)
+results = get_result.get_error_message(urlpath)
