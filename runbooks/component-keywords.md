@@ -12,6 +12,7 @@ It contains the following failure types, and the corresponding key words are lis
   4. failed to
   5. not ready/health/active/same/scheduled
   6. due to
+  7. time out...not found, this falure is probably 80% product bug.
 
 ### Automation Bug
 
@@ -33,17 +34,17 @@ It contains the following failure types, and the corresponding key words are lis
   3. not find
   4. Expected <bool>: false to be true
   5. no cluster
+  6. not ready
   
 ### Automation bug 
 
   2. Expected <bool>: false to be true  
-  3. Test Panicked
+  3. Test Panicked 
 
 ### System issue:
+  1. time out
 
-  1. time out 
-
-## Component Name - GRC
+## Component Name - grc
 
 ### Product bug
 
@@ -64,17 +65,23 @@ It contains the following failure types, and the corresponding key words are lis
   2. `cy.click()` failed
   3. before all. that means dependent package not be installed
 
-## Component Name - ALC
+## Component Name - alc
 
 ### Product bug
 
 ### Automation bug
-
-  1. before all. that means dependent package not be installed
-  2. Expected to find element
-  3. Expected to find content 
-  4. command exited with a non-zero code
+  1. Expected to find element
+  2. Expected to find content 
+  3. command exited with a non-zero code
+  4. subscription is not ready
+  5. to include
 
 ### System issue
-
   1. Timed out retrying
+  2. before all. that means dependent package not be installed
+
+## Component Name - Obs
+
+### Product bug
+  1. should have 3 but got 2 ready replicas
+

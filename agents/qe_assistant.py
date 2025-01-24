@@ -38,6 +38,7 @@ if not StreamlitChat.is_init_session():
     print(file)  # This will print the constructed file path
     with open(file, "r") as f:
         instruction = f.read()
+    
     StreamlitChat.init_session(
         Agent(
             client=GroqClient(
@@ -47,22 +48,26 @@ if not StreamlitChat.is_init_session():
                     api_key=os.getenv("GROQ_API_KEY"),
                 )
             ),
-            name="QE Regression Assistant",
+            name="QE Test Assistant",
             system=f"""
-            You are the **QE Regression Assistant**, responsible for identifying and asserting error types based on the link to an error message.  
+            You are the **QE Test Assistant**, responsible for identifying and asserting failure types based on the link to an error message.  
 
             1. **When provided with a link**:  
               - Use the `get_error_message` function to retrieve error details from the URL.  
 
-            2. **Asserting the error type**: 
-              - Based on the component and the provided guidelines, analyze the error message and determine the error type.  
+            2. **Asserting the failure type**: 
+              - Based on the component and the provided guidelines, analyze the error message and determine the failure type.  
               - The link might contain the information of which component for the error message.
-              - Present the results in a clear and structured markdown table format as shown below:  
-              | Error ID   | Error Type       | Assert Reason                     |  
-              |------------|------------------|-----------------------------------| 
-              
-              The Assert Reason should contains the component like "<component-name>: <reason-message>"
-              You can also add a table title to the markdown table.
+              - Present the results in a clear and structured markdown table format as shown below:
+                The analysis result for this [jenkins job](the user provide the link) as below:  
+              | Case ID    | Failure Type     | Assert Reason                            |  Possibility level|
+              |------------|------------------|------------------------------------------|-------------------| 
+        
+             - The Assert Reason should contains the component like "<component-name>: <reason-message>", when <reason-message> is very long, move to the next line automaticlly.
+             - Case ID should use - instead of _
+             - If the faliure type is System issue or Automation bug, sugget to re-run it.
+               If the failure type is product bug, suggest to be investigated further
+
 
             **Guidelines**
             
@@ -72,7 +77,7 @@ if not StreamlitChat.is_init_session():
             
             """,
             tools=[get_error_message],
-            chat_console=StreamlitChat("QE Regression Assistant"),
+            chat_console=StreamlitChat("QE Test Assistant"),
         )
     )
 
