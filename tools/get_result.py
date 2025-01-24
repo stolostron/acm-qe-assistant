@@ -41,7 +41,7 @@ def get_error_message(url):
     """
 
     # Fetch the webpage content
-    webpage_content = fetch_webpage(url)
+    webpage_content = fetch_webpage(url+"/testReport/")
     if webpage_content:
         # Parse the webpage content
         soup = parse_webpage(webpage_content)
@@ -59,7 +59,7 @@ def get_error_message(url):
         for id_ in matching_ids:
             real_id = re.sub(r"^test-", "", id_)
             real_id_con = real_id.replace("&amp;quot;", '"')
-            error_msg_url = url + "/" + real_id_con + "/summary"
+            error_msg_url = url + "/testReport/" + real_id_con + "/summary"
             error_content = fetch_webpage(error_msg_url)
             if error_content:
                 error_soup = parse_webpage(error_content)
@@ -86,5 +86,5 @@ def get_error_message(url):
         # print and return results
         for real_id, error_text in results:
             case_id = re.sub(r"_", "-", real_id)
-            print(f"\ID: {case_id}\nError Message: \n{error_text}\n")
+            print(f"ID: {case_id}\nError Message: \n{error_text}\n")
         return results
