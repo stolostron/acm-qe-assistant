@@ -85,3 +85,31 @@ It contains the following failure types, and the corresponding key words are lis
 ### Product bug
   1. should have 3 but got 2 ready replicas
 
+### Automation bug
+  1. not found
+  2. Expected <bool>: false to be true
+
+### System issue
+  1. no such host
+
+## Component Name - clc
+
+### Product bug
+### Automation bug
+  1. Expected to find content
+  2. failed because it targeted a disabled element
+  3. Expected to find element
+  4. `cy.click()` failed
+  5. The following error originated from your test code, not from Cypress
+  
+### System issue
+  1. 503: Service Unavailable
+  2. before all
+  3. due to cluster pool issue
+
+## Component Name - search
+
+### Product bug
+### Automation bug
+### System issue 
+
