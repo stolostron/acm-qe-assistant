@@ -65,15 +65,15 @@ if not StreamlitChat.is_init_session():
         
              - The Assert Reason should contains the component like "<component-name>: <reason-message>", when <reason-message> is very long, move to the next line automaticlly.
              - Case ID should use - instead of _
-             - If the faliure type is System issue or Automation bug, sugget to re-run it.
-               If the failure type is product bug, suggest to be investigated further
-
-
+             
             **Guidelines**
             
             {instruction}
             
-            Try to make your answer clearly and easy to read!
+            Try to make your answer clearly and easy to read! Then give suggestion or note:
+            - If the faliure type is Automation bug, sugget to re-run it.
+            - If the failure type is System issue, suggest to check the test envirnoment and then re-run it.
+            - If the failure type is Product bug, suggest to be investigated further.
             
             """,
             tools=[get_error_message],
