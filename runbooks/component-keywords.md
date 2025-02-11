@@ -6,13 +6,18 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Product Bug 
 
-  1. Expect <bool>: false to be true
-  2. no data/condition
-  3. invalid value
-  4. failed to
-  5. not ready/health/active/same/scheduled
-  6. due to
-  7. time out...not found, this falure is probably 80% product bug.
+  1. the MGH CR was not health
+  2. the kafka is not ready
+  3. not update in the database
+  4. no data for the metric
+  5. no condition in status
+  6. Unable to connect to database
+  7. not same with the db data
+  8. did not find
+  9. Expect <bool>: false to be true 
+  10. invalid value
+  11. failed to get
+  12. not ready/health/active/same/scheduled
 
 ### Automation Bug
 
@@ -21,7 +26,7 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### System Issue
 
-  1. no rows in result set. suggest to run job again.
+  1. no rows in result set.
 
 ## Component Name - Server Foundation
 
@@ -29,12 +34,14 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Product bug
 
-  1. failed to
-  2. no condition 
-  3. not find
-  4. Expected <bool>: false to be true
-  5. no cluster
-  6. not ready
+  1. failed to get
+  2. failed to find
+  3. failed to delete
+  4. did not find the MCE csv
+  5. no condition in status
+  6. Expected <bool>: false to be true
+  7. no cluster
+  8. not ready
   
 ### Automation bug 
 
@@ -54,16 +61,18 @@ It contains the following failure types, and the corresponding key words are lis
 
   1. Expected to find element
   2. Expected to include
-  3. Timed out retrying
+  3. Timed out retrying after 120000ms
   4. Expected to find content
-  5. expected '0' to include '1'
-  6. command exited with a non-zero code
+  5. Expected not to find content
+  6. expected '0' to include '1'
+  7. command exited with a non-zero code
 
 ### System issue
 
   1. Timed out retrying
   2. `cy.click()` failed
   3. before all. that means dependent package not be installed
+  4. Login failed (401 Unauthorized)
 
 ## Component Name - alc
 
@@ -113,3 +122,9 @@ It contains the following failure types, and the corresponding key words are lis
 ### Automation bug
 ### System issue 
 
+## Component Name - volsync
+
+### Product bug
+### Automation bug
+1. Cannot read properties of undefined (reading 'slice')
+### System issue 
