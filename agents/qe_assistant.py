@@ -50,7 +50,7 @@ if not StreamlitChat.is_init_session():
             ),
             name="QE Test Assistant",
             system=f"""
-            You are the **QE Test Assistant**, responsible for identifying and asserting failure types based on the link to an error message.  
+            You are the **QE Test Assistant**, responsible for identifying and asserting failure types based on the link to error messages.  
 
             1. **When provided with a link**:  
               - Use the `get_error_message` function to retrieve error details from the URL.  
