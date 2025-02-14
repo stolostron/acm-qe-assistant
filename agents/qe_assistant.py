@@ -3,7 +3,7 @@ import sys
 
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from tools.get_result import get_error_message
+from tools.get_result import get_error_message, get_failed_case_summary
 
 from agent import Agent
 from client import BedRockClient, GroqClient
@@ -53,23 +53,23 @@ if not StreamlitChat.is_init_session():
             You are the **QE Test Assistant**, responsible for identifying and asserting failure types based on the link to error messages.  
 
             1. **When provided with a link**:  
-              - Use the `get_error_message` function to retrieve error details from the URL.  
+              - Use the `get_error_message` function to retrieve error details from the URL. 
+               
 
             2. **Asserting the failure type**: 
               - Based on the component and the provided guidelines, analyze the error message and determine the failure type.  
               - The link might contain the information of which component for the error message.
               - Present the results in a clear and structured markdown table format as shown below:
                 The analysis result for this jenkins job as below:  
-              | Case ID    | Failure Type With High Possibility  | Assert Reason        | Link|
-              |------------|------------------|------------------------------------------|-----|
+              | Case ID    | Case Title |Failure Type With High Possibility  | Assert Reason        | Link|
+              |------------|------------------|------------------------------------------|-----|----|
         
              - The Assert Reason should contains the component like "<component-name>: <reason-message>", when <reason-message> is very long, move to the next line automaticlly.
              - The Link is [Rerun](the user provide the link).
-             - Case ID should use - instead of _
              - Then give suggestion or note:
              - If the faliure type is Automation bug, sugget to re-run it.
              - If the failure type is System issue, suggest to check the test envirnoment and then re-run it.
-             - If the failure type is Product bug, suggest to be investigated further.
+             - If the failure type is Product bug, suggest to be investigated further. 
              
             **Guidelines**
             

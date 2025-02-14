@@ -34,7 +34,7 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Product bug
 
-  1. failed to get
+  1. failed to get the metrics
   2. failed to find
   3. failed to delete
   4. did not find the MCE csv
