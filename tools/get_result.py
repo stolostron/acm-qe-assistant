@@ -72,7 +72,7 @@ def get_error_message(url):
                         pattern = r"RHACM4K_\d+"
                         match = re.search(pattern, real_id)
                         if match:
-                            results.append((match.group(), error_text))
+                            results.append((match.group(), error_text, real_id_con))
                 else:
                     stacktrace_elements = error_soup.find_all(
                         "pre", id=lambda x: x and "-stacktrace" in x
@@ -82,9 +82,41 @@ def get_error_message(url):
                         pattern = r"RHACM4K_\d+"
                         match = re.search(pattern, real_id)
                         if match:
-                            results.append((match.group(), error_text))
+                            results.append((match.group(), error_text, real_id_con))
         # print and return results
-        for real_id, error_text in results:
+        final_results = []
+        for real_id, error_text, real_id_con in results:
             case_id = re.sub(r"_", "-", real_id)
-            print(f"ID: {case_id}\nError Message: \n{error_text}\n")
-        return results
+            index = real_id_con.find(real_id)
+            substring = real_id_con[index + len(real_id):]
+            substring = substring.replace("_", " ").replace("/", " ")
+            title =  " ".join(substring.split())
+            final_results.append({
+            "ID": case_id,
+            "Title": title,
+            "Error Message": error_text
+        })
+            print(f"ID: {case_id}\nTitle: {title}\nError Message: \n{error_text}\n")
+        return final_results
+
+def get_failed_case_summary(case_id, failedurl):
+    result = [] 
+    consoleurl=f"{failedurl}/consoleText"
+    webpage_content = fetch_webpage(consoleurl)
+    if webpage_content:
+        # Parse the webpage content
+        #soup = parse_webpage(webpage_content)
+    #   failed_tests = soup.find_all('span', style="color: #00CD00;")
+    #    content = [span.get_text() for span in failed_tests]
+    #    print(content)        
+        case_log = []  
+        capture = False  
+
+        for line in webpage_content.splitlines():
+           if case_id in line:  
+              capture = True
+           if capture:
+              case_log.append(line)
+              if line.strip() == "FAILED":  
+                 break
+    return "\n".join(case_log)
