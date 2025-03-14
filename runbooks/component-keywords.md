@@ -55,7 +55,7 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Product bug
 
-  1. AssertionError: Expected
+  1. AssertionError: Expected to
 
 ### Automation bug
 
@@ -65,12 +65,14 @@ It contains the following failure types, and the corresponding key words are lis
   4. Expected to find content
   5. Expected not to find content
   6. expected '0' to include '1'
-  7. command exited with a non-zero code
+  7. failed because the command exited with a non-zero code
+  8. k8srequiredlabelsinvalid does not have the expected message "validation.gatekeeper.sh" denied the request
+  9. Internal error occurred: failed calling webhook "ocm.mutating.webhook.admission.open-cluster-management.io"
 
 ### System issue
 
   1. Timed out retrying
-  2. `cy.click()` failed
+  2. `cy.click()` failed because this element is `disabled`
   3. before all. that means dependent package not be installed
   4. Login failed (401 Unauthorized)
 

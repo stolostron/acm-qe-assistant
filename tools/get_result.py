@@ -87,8 +87,9 @@ def get_error_message(url):
         final_results = []
         for real_id, error_text, real_id_con in results:
             case_id = re.sub(r"_", "-", real_id)
-            index = real_id_con.find(real_id)
-            substring = real_id_con[index + len(real_id):]
+            index = real_id_con.find(real_id) 
+            substring = real_id_con[index + len(real_id):] 
+            substring=substring[substring.find("__", substring.find("__") + 2) + 2:]
             substring = substring.replace("_", " ").replace("/", " ")
             title =  " ".join(substring.split())
             final_results.append({
