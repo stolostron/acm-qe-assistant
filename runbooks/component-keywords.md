@@ -26,7 +26,7 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### System Issue
 
-  1. no rows in result set.
+  1. no rows in result set
 
 ## Component Name - Server Foundation
 
@@ -34,9 +34,10 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Product bug
 
-  1. failed to get the metrics
+  1. failed to get
   2. failed to find
   3. failed to delete
+  4. failed to create the managedcluster resources
   4. did not find the MCE csv
   5. no condition in status
   6. Expected <bool>: false to be true
@@ -61,7 +62,7 @@ It contains the following failure types, and the corresponding key words are lis
 
   1. Expected to find element
   2. Expected to include
-  3. Timed out retrying after 120000ms
+  3. Timed out retrying
   4. Expected to find content
   5. Expected not to find content
   6. expected '0' to include '1'
@@ -79,22 +80,25 @@ It contains the following failure types, and the corresponding key words are lis
 ## Component Name - alc
 
 ### Product bug
+ 1. subscription is not ready within time limit
+ 2. Route is not ready within time limit
 
 ### Automation bug
   1. Expected to find element
   2. Expected to find content 
-  3. command exited with a non-zero code
-  4. subscription is not ready
-  5. to include
+  3. because the command exited with a non-zero code
+  4. to include
 
 ### System issue
   1. Timed out retrying
   2. before all. that means dependent package not be installed
+  3. not ready within time limit
 
 ## Component Name - Obs
 
 ### Product bug
   1. should have 3 but got 2 ready replicas
+  2. should have 1 but got 0 ready replicas
 
 ### Automation bug
   1. not found
