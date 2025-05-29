@@ -43,8 +43,7 @@ Then, you will get UI console, you can easily to chat it in this console.
 
 ### Demo
 
-- [Generate automation scripts](https://drive.google.com/file/d/1jBSfPllx_QEwB1UDjr3vjssmO_dRKBXE/view?usp=drive_link)
+- For analyzing failed cases, you just input jenkins job link in the chat.
+- For generating scripts, you can input prompt just like “generate scripts for RHACM4K-56952(polation case ID)”
 
-
-- [Analyse failed cases](https://drive.google.com/file/d/1xm6a0CMnz8d9LcqEORTRJ9IQoR_Qfd9A/view?usp=drive_link)
 
