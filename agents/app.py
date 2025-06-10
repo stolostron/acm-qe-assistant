@@ -22,6 +22,7 @@ ACCESS_TOKEN=os.getenv("API_KEY")
 POLARION_API=os.getenv("POLARION_API")
 POLARION_USER=os.getenv("POLARION_USER")
 POLARION_PASSWD=os.getenv("POLARION_PASSWD")
+POLARION_PROJECT=os.getenv("POLARION_PROJECT")
 client = AssistantClient(
     base_url=MODEL_API, model=MODEL_ID, api_key=ACCESS_TOKEN)
 
@@ -111,7 +112,8 @@ Generate the automation scripts and analyse the failed case.
                      if match:
                       ploarion_client = login_to_polarion(polarion_endpoint=POLARION_API,polarion_user=POLARION_USER,polarion_password=POLARION_PASSWD)  
                       polarion_id = match.group(0)
-                      _, steps = get_test_case_by_id(ploarion_client, "RHACM4K", polarion_id)
+                      project_id = POLARION_PROJECT  
+                      _, steps = get_test_case_by_id(ploarion_client, project_id, polarion_id)
                       feature_description = steps
                      else:
                        feature_description = re.sub(r"generate( automation)? scripts", "", prompt, flags=re.IGNORECASE).strip()  

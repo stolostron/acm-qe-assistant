@@ -33,8 +33,11 @@ export API_MODLE="https://granite-3-2-8b-instructxxxx:443/" ---This is located i
 export API_ID="/data/granite-3.2-8b-instruct"
 export API_KEY=="xxxxx"
 export POLARION_API="https://polarion.engineering.redhat.com/polarion"
+export POLARION_PROJECT="RHACM4K" --- This is RHACM project
 export POLARION_USER="xxx"
 export POLARION_PASSWD="xxx"
+
+
 ```
 4. Run App
 
