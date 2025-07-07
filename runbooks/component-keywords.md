@@ -14,15 +14,16 @@ It contains the following failure types, and the corresponding key words are lis
   6. Unable to connect to database
   7. not same with the db data
   8. did not find
-  9. Expect <bool>: false to be true 
-  10. invalid value
-  11. failed to get
-  12. not ready/health/active/same/scheduled
+  9. invalid value
+  10. failed to get
+  11. not ready/health/active/same/scheduled
+  12. status is Pending due to
+  13. status is Failed due to
 
 ### Automation Bug
 
   1. Test Panicked
-  2. Expect <bool>: false to be true
+  2. Expected.*to be true
 
 ### System Issue
 
@@ -46,7 +47,7 @@ It contains the following failure types, and the corresponding key words are lis
   
 ### Automation bug 
 
-  2. Expected <bool>: false to be true  
+  2. Expected.*to be true  
   3. Test Panicked 
 
 ### System issue:
@@ -69,6 +70,8 @@ It contains the following failure types, and the corresponding key words are lis
   7. failed because the command exited with a non-zero code
   8. k8srequiredlabelsinvalid does not have the expected message "validation.gatekeeper.sh" denied the request
   9. Internal error occurred: failed calling webhook "ocm.mutating.webhook.admission.open-cluster-management.io"
+  10. Timed out retrying
+  11. does not have the expected message
 
 ### System issue
 
@@ -102,7 +105,7 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Automation bug
   1. not found
-  2. Expected <bool>: false to be true
+  2. Expected.*to be true
 
 ### System issue
   1. no such host

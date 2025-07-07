@@ -121,3 +121,5 @@ def get_failed_case_summary(case_id, failedurl):
               if line.strip() == "FAILED":  
                  break
     return "\n".join(case_log)
+
+
