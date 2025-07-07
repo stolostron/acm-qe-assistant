@@ -6,7 +6,6 @@ pydantic==2.9.2
 agent-chat==0.1.1
 streamlit==1.41.1
 bs4==0.0.2
-llama_index==0.12.12
 instructor==1.7.2
 httpx==0.27.2
 html5lib
