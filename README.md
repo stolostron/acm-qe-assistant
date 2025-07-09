@@ -12,6 +12,7 @@ The QE Assistant Tool is aimed at facilitating QE tasks in RHACM environments, c
 1. Python 3.10 or higher
 2. VPN required
 3. You have AI model API token. for example, [Models.corp](https://gitlab.cee.redhat.com/models-corp/user-documentation/-/blob/main/getting-started.md)
+4. You have polarion certificate named "redhatcert.pem" in the directory so that connect the polarion.
 
 ### Steps
 
@@ -37,7 +38,7 @@ export POLARION_PROJECT="RHACM4K" --- This is RHACM project
 export POLARION_USER="xxx"
 export POLARION_PASSWD="xxx"
 
-
+Note: You should have polarion certificate named "redhatcert.pem" in the directory so that connect the polarion.
 ```
 4. Run App
 
