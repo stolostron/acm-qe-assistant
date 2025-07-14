@@ -41,14 +41,13 @@ It contains the following failure types, and the corresponding key words are lis
   4. failed to create the managedcluster resources
   4. did not find the MCE csv
   5. no condition in status
-  6. Expected <bool>: false to be true
-  7. no cluster
-  8. not ready
+  6. no cluster
+  7. not ready
   
 ### Automation bug 
 
-  2. Expected.*to be true  
-  3. Test Panicked 
+  1. Expected.*to be true  
+  2. Test Panicked 
 
 ### System issue:
   1. time out
@@ -75,7 +74,6 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### System issue
 
-  1. Timed out retrying
   2. `cy.click()` failed because this element is `disabled`
   3. before all. that means dependent package not be installed
   4. Login failed (401 Unauthorized)
