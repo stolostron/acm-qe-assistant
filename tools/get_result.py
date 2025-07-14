@@ -41,7 +41,8 @@ def get_error_message(url):
     """
 
     # Fetch the webpage content
-    webpage_content = fetch_webpage(url+"/testReport/")
+    real_url = re.match(r"(.*?/\d+)(?:/|$)", url).group(0)
+    webpage_content = fetch_webpage(real_url+"/testReport/")
     if webpage_content:
         # Parse the webpage content
         soup = parse_webpage(webpage_content)
@@ -56,10 +57,11 @@ def get_error_message(url):
             re.search(r'id="([^"]+)"', str(div)).group(1) for div in contains_text
         ]
         # Find all hidden link contents
+        error_dict = {}
         for id_ in matching_ids:
             real_id = re.sub(r"^test-", "", id_)
             real_id_con = real_id.replace("&amp;quot;", '"')
-            error_msg_url = url + "/testReport/" + real_id_con + "/summary"
+            error_msg_url = real_url + "/testReport/" + real_id_con + "/summary"
             error_content = fetch_webpage(error_msg_url)
             if error_content:
                 error_soup = parse_webpage(error_content)
@@ -72,54 +74,57 @@ def get_error_message(url):
                         pattern = r"RHACM4K_\d+"
                         match = re.search(pattern, real_id)
                         if match:
-                            results.append((match.group(), error_text, real_id_con))
-                else:
-                    stacktrace_elements = error_soup.find_all(
+                            key = (match.group(), real_id_con)
+                            if key not in error_dict:
+                               error_dict[key] = {"error_text": "", "stacktrace_text": ""}
+                            error_dict[key]["error_text"] = error_text
+                 
+               
+                stacktrace_elements = error_soup.find_all(
                         "pre", id=lambda x: x and "-stacktrace" in x
                     )
-                    for pre_tag_s in stacktrace_elements:
-                        error_text = pre_tag_s.get_text(strip=True)
+                if stacktrace_elements:
+                    for pre_tag in stacktrace_elements:
+                        stack_text = pre_tag.get_text(strip=True)
                         pattern = r"RHACM4K_\d+"
                         match = re.search(pattern, real_id)
                         if match:
-                            results.append((match.group(), error_text, real_id_con))
+                            key = (match.group(), real_id_con)
+                            if key not in error_dict:
+                               error_dict[key] = {"error_text": "", "stacktrace_text": ""}
+                            error_dict[key]["stacktrace_text"] = stack_text
         # print and return results
         final_results = []
-        for real_id, error_text, real_id_con in results:
-            case_id = re.sub(r"_", "-", real_id)
-            index = real_id_con.find(real_id) 
-            substring = real_id_con[index + len(real_id):] 
-            substring=substring[substring.find("__", substring.find("__") + 2) + 2:]
-            substring = substring.replace("_", " ").replace("/", " ")
-            title =  " ".join(substring.split())
-            final_results.append({
+        #for item in results:
+        #  if len(item) == 4:
+        #    real_id, error_text, stack_text, real_id_con=item
+        #  elif len(item) == 3:
+        #    real_id, error_text, real_id_con=item
+        #    stack_text = ""
+        #  else:
+        #    continue
+        for (real_id, real_id_con), texts in error_dict.items():  
+          case_id = re.sub(r"_", "-", real_id)
+          index = real_id_con.find(real_id) 
+          substring = real_id_con[index + len(real_id):] 
+          substring=substring[substring.find("__", substring.find("__") + 2) + 2:]
+          substring = substring.replace("_", " ").replace("/", " ")
+          title =  " ".join(substring.split())
+          error_text = texts.get("error_text", "")
+          stack_text = texts.get("stacktrace_text", "")
+          final_results.append({
             "ID": case_id,
             "Title": title,
-            "Error Message": error_text
+            "Error Message": error_text,
+            "Stacktrace Message": stack_text
         })
-            print(f"ID: {case_id}\nTitle: {title}\nError Message: \n{error_text}\n")
-        return final_results
+          print(f"ID: {case_id}\nTitle: {title}\nError Message: \n{error_text}\nStacktrace Message: \n{stack_text}\n")
+    return final_results
 
-def get_failed_case_summary(case_id, failedurl):
-    result = [] 
-    consoleurl=f"{failedurl}/consoleText"
-    webpage_content = fetch_webpage(consoleurl)
-    if webpage_content:
-        # Parse the webpage content
-        #soup = parse_webpage(webpage_content)
-    #   failed_tests = soup.find_all('span', style="color: #00CD00;")
-    #    content = [span.get_text() for span in failed_tests]
-    #    print(content)        
-        case_log = []  
-        capture = False  
 
-        for line in webpage_content.splitlines():
-           if case_id in line:  
-              capture = True
-           if capture:
-              case_log.append(line)
-              if line.strip() == "FAILED":  
-                 break
-    return "\n".join(case_log)
+
+if __name__ == "__main__":
+   url = "https://jenkins-csb-rhacm-tests.dno.corp.redhat.com/job/qe-acm-automation-poc/job/grc-e2e-test-execution/2737/console"
+   get_error_message(url)
 
 
