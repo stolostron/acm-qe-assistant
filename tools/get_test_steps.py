@@ -49,12 +49,10 @@ def get_test_case_by_id(polarion_client, project_id, case_id):
         print(f"Not find the test case {case_id}")
         return None, []
     test_steps = target_case.getTestSteps()
+    test_component = target_case.getCustomField('casecomponent')
     print(f"Test case: \n{target_case.title}")
     print(f"\nTest steps: \n{test_steps}")
-    #print(f"Test case: \n{target_case.component}")
+    print(f"\nTest component: \n{test_component}")
 
-    return target_case, test_steps
+    return target_case, test_steps, test_component
 
-#if __name__ == "__main__":
-#    ploarion_client = login_to_polarion(polarion_endpoint="",polarion_user="",polarion_password="")
- #   case, steps = get_test_case_by_id(ploarion_client, "RHACM4K", "RHACM4K-56143")  
