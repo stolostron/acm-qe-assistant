@@ -60,9 +60,9 @@ It contains the following failure types, and the corresponding key words are lis
 
 ### Automation bug
 
-  1. Expected to find element
+  1. Timed out retrying after 120000ms: Expected
   2. Expected to include
-  3. Timed out retrying
+  3. Timed out retrying after 120000ms: Expected to find element
   4. Expected to find content
   5. Expected not to find content
   6. expected '0' to include '1'
@@ -73,9 +73,9 @@ It contains the following failure types, and the corresponding key words are lis
   11. does not have the expected message
 
 ### System issue
-
+  1. Timed out retrying
   2. `cy.click()` failed because this element is `disabled`
-  3. before all. that means dependent package not be installed
+  3. Timed out retrying Because this error occurred during a `before all`
   4. Login failed (401 Unauthorized)
 
 ## Component Name - alc
