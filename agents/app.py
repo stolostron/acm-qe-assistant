@@ -16,15 +16,16 @@ import truststore
 
 truststore.inject_into_ssl()
 load_dotenv()
-MODEL_API=os.getenv("API_MODLE")
-MODEL_ID=os.getenv("API_ID")
-ACCESS_TOKEN=os.getenv("API_KEY")
+MODEL_API=os.getenv("MODEL_API")
+MODEL_ID=os.getenv("MODEL_ID")
+ACCESS_TOKEN=os.getenv("ACCESS_TOKEN")
 POLARION_API=os.getenv("POLARION_API")
 POLARION_USER=os.getenv("POLARION_USER")
-POLARION_PASSWD=os.getenv("POLARION_PASSWD")
+POLARION_PASSWD=os.getenv("POLARION_PASSWORD")
 POLARION_PROJECT=os.getenv("POLARION_PROJECT")
+POLARION_TOKEN=os.getenv("POLARION_TOKEN")
 client = AssistantClient(
-    base_url=MODEL_API, model=MODEL_ID, api_key=ACCESS_TOKEN)
+    api_key=ACCESS_TOKEN, base_url=MODEL_API, model=MODEL_ID)
 
 # Streamlit 
 def run_streamlit_app():
@@ -110,10 +111,10 @@ Generate the automation scripts and analyse the failed case.
                     # the logic for generating automation scripts
                      match = re.search(r"RHACM4K-\d+", prompt, re.IGNORECASE)
                      if match:
-                      ploarion_client = login_to_polarion(polarion_endpoint=POLARION_API,polarion_user=POLARION_USER,polarion_password=POLARION_PASSWD)  
+                      ploarion_client = login_to_polarion(polarion_endpoint=POLARION_API,polarion_user=POLARION_USER,polarion_password=POLARION_PASSWD, polarion_token=POLARION_TOKEN)  
                       polarion_id = match.group(0)
-                      project_id = POLARION_PROJECT  
-                      _, steps = get_test_case_by_id(ploarion_client, project_id, polarion_id)
+                      project_id=POLARION_PROJECT  
+                      _, steps,_ = get_test_case_by_id(ploarion_client, project_id, polarion_id)
                       feature_description = steps
                      else:
                        feature_description = re.sub(r"generate( automation)? scripts", "", prompt, flags=re.IGNORECASE).strip()  
