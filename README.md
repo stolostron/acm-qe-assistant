@@ -57,9 +57,9 @@ pip install -r requirements.txt
 3. Export AI model enviroment variable
 
 ```
-export API_MODLE="https://granite-3-2-8b-instructxxxx:443/" ---This is located in Models.corp
-export API_ID="/data/granite-3.2-8b-instruct"
-export API_KEY=="xxxxx"
+export MODEL_API="https://granite-3-2-8b-instructxxxx:443/" ---This is located in Models.corp
+export MODEL_ID="/data/granite-3.2-8b-instruct"
+export MODEL_KEY=="xxxxx"
 export POLARION_API="https://polarion.engineering.redhat.com/polarion"
 export POLARION_PROJECT="RHACM4K" --- This is RHACM project
 export POLARION_TOKEN="xxx" 
@@ -78,5 +78,3 @@ Then, you will get UI console, you can easily to chat it in this console.
 
 - For analyzing failed cases, you just input jenkins job link in the chat.
 - For generating scripts, you can input prompt just like “generate scripts for RHACM4K-56952(polation case ID)”
-
-

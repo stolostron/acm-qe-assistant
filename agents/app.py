@@ -18,14 +18,14 @@ truststore.inject_into_ssl()
 load_dotenv()
 MODEL_API=os.getenv("MODEL_API")
 MODEL_ID=os.getenv("MODEL_ID")
-ACCESS_TOKEN=os.getenv("ACCESS_TOKEN")
+MODEL_KEY=os.getenv("MODEL_KEY")
 POLARION_API=os.getenv("POLARION_API")
 POLARION_USER=os.getenv("POLARION_USER")
 POLARION_PASSWD=os.getenv("POLARION_PASSWORD")
 POLARION_PROJECT=os.getenv("POLARION_PROJECT")
 POLARION_TOKEN=os.getenv("POLARION_TOKEN")
 client = AssistantClient(
-    api_key=ACCESS_TOKEN, base_url=MODEL_API, model=MODEL_ID)
+    api_key=MODEL_KEY, base_url=MODEL_API, model=MODEL_ID)
 
 # Streamlit 
 def run_streamlit_app():

@@ -65,4 +65,3 @@ def get_test_case_by_id(polarion_client, project_id, case_id):
     print(f"\nTest component: \n{test_component}")
 
     return target_case, test_steps, test_component
-
