@@ -4,10 +4,10 @@ from polarion import polarion
 from polarion.record import Record
 import logging
 
-#LOG_FORMAT = '%(asctime)s | %(levelname)7s | %(name)s | line:%(lineno)4s | %(message)s)'
-#logging.basicConfig(format=LOG_FORMAT, level=logging.DEBUG)
+LOG_FORMAT = '%(asctime)s | %(levelname)7s | %(name)s | line:%(lineno)4s | %(message)s)'
+logging.basicConfig(format=LOG_FORMAT, level=logging.INFO)
 
-def login_to_polarion(polarion_endpoint, polarion_user, polarion_password):
+def login_to_polarion(polarion_endpoint, polarion_user, polarion_password, polarion_token):
     """
     This function logs in to polarion and return the polarion client object
     :param polarion_endpoint: The polarion URL ex: https://polarion.engineering.redhat.com/polarion
@@ -19,9 +19,18 @@ def login_to_polarion(polarion_endpoint, polarion_user, polarion_password):
         cwd = os.getcwd()
         print(cwd)
         logging.info('Checking connection to Polarion...')
-        polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password)
+        if polarion_token:
+            logging.info("Logging in using token...")
+            polarion_client = polarion.Polarion(polarion_endpoint, "", "", polarion_token)
+        elif polarion_user and polarion_password:
+            polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password, "")
+        else:
+            raise ValueError("Either token or username/password must be provided.")
+       # polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password)
+        #polarion_client = polarion.Polarion(polarion_endpoint, "", "", polarion_token)
         logging.info('Connection to Polarion OK.')
         return polarion_client
+
     except Exception:
         logging.info('SSL Error. Adding custom certs to Certifi store...')
         cafile = certifi.where()
@@ -30,7 +39,8 @@ def login_to_polarion(polarion_endpoint, polarion_user, polarion_password):
         with open(cafile, 'ab') as outfile:
             outfile.write(customca)
         logging.info('That might have worked.')
-        polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password)
+        # Retry once after cert patch
+        polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password, "")
         logging.info('Connection to Polarion OK.')
         return polarion_client
 
@@ -55,4 +65,3 @@ def get_test_case_by_id(polarion_client, project_id, case_id):
     print(f"\nTest component: \n{test_component}")
 
     return target_case, test_steps, test_component
-

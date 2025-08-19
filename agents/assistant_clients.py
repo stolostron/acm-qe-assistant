@@ -1,4 +1,5 @@
 from typing import Dict, List
+import httpx
 import requests
 
 class AssistantClient:
@@ -20,12 +21,14 @@ class AssistantClient:
         print("Debug - Request Payload:", payload) 
 
         try:
-          response = requests.post(f"{self.base_url}/v1/chat/completions", headers=headers, json=payload)
+          response = requests.post(f"{self.base_url.rstrip('/')}/v1/chat/completions", headers=headers, json=payload)
           response.raise_for_status()
           data = response.json()
           message = data["choices"][0]["message"]["content"]
           return message
         except requests.exceptions.HTTPError as e:
+             print("Status code:", response.status_code)
+             print("Response body:", response.text)
              print("HTTP Error Details:", e.response.text)
              raise   
     
