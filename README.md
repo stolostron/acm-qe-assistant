@@ -15,6 +15,7 @@ This tool is now compatible with Google's Gemini CLI. See [GEMINI.md](GEMINI.md)
 #### Prerequisites
 1. Python 3.10 or higher
 2. VPN required
+3. Gemini CLI installed
 
 #### Steps
 
@@ -24,7 +25,11 @@ This tool is now compatible with Google's Gemini CLI. See [GEMINI.md](GEMINI.md)
  git clone https://github.com/stolostron/acm-qe-assistant.git
  cd acm-qe-assistant
  ```
-2. Make the file named .env with few credentials
+ 2. Install dependencies:
+```
+pip install -r requirements.txt
+```
+ 3. Make the file named .env with few credentials
 
 ```
 POLARION_API="https://polarion.engineering.redhat.com/polarion"
@@ -33,6 +38,32 @@ POLARION_TOKEN="xxx"
 
 ```
 
+### Using with Claude Code
+
+#### Prerequisites
+1. Python 3.10 or higher
+2. VPN required
+3. Claude Code CLI installed
+
+#### Steps
+
+1. Clone the repository:
+```
+git clone https://github.com/stolostron/acm-qe-assistant.git
+cd acm-qe-assistant
+```
+
+2. Install dependencies:
+```
+pip install -r requirements.txt
+```
+
+3. Set up environment variables:
+```
+export POLARION_API="https://polarion.engineering.redhat.com/polarion"
+export POLARION_PROJECT="RHACM4K"
+export POLARION_TOKEN="xxx"
+```
 
 ### Using with AI Models
 
