@@ -40,6 +40,8 @@ POLARION_TOKEN="xxx"
 
 ### Using with Claude Code
 
+This tool is now compatible with Anthropic's Claude Code CLI, providing intelligent automation assistance for QE workflows. See [CLAUDE.md](CLAUDE.md) for detailed instructions on available capabilities and usage patterns.
+
 #### Prerequisites
 1. Python 3.10 or higher
 2. VPN required
@@ -48,17 +50,20 @@ POLARION_TOKEN="xxx"
 #### Steps
 
 1. Clone the repository:
+   
 ```
 git clone https://github.com/stolostron/acm-qe-assistant.git
 cd acm-qe-assistant
 ```
 
 2. Install dependencies:
+   
 ```
 pip install -r requirements.txt
 ```
 
 3. Set up environment variables:
+   
 ```
 export POLARION_API="https://polarion.engineering.redhat.com/polarion"
 export POLARION_PROJECT="RHACM4K"
