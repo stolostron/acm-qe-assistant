@@ -1,7 +1,7 @@
 
 import os
 import argparse
-from tools.get_test_steps_from_polarion import login_to_polarion, get_test_case_by_id
+from get_test_steps_from_polarion import login_to_polarion, get_test_case_by_id
 #from tools.get_test_steps import login_to_polarion, get_test_case_by_id
 from dotenv import load_dotenv
 
