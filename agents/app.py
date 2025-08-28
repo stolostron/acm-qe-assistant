@@ -109,7 +109,8 @@ Generate the automation scripts and analyse the failed case.
             reply = ""    
             if intent == "generate_test_script":
                     # the logic for generating automation scripts
-                     match = re.search(r"RHACM4K-\d+", prompt, re.IGNORECASE)
+                     match = re.search(r"RHACM4K|OCP-\d+", prompt, re.IGNORECASE)
+                     #match = re.search(prompt, re.IGNORECASE)
                      if match:
                       ploarion_client = login_to_polarion(polarion_endpoint=POLARION_API,polarion_user=POLARION_USER,polarion_password=POLARION_PASSWD, polarion_token=POLARION_TOKEN)  
                       polarion_id = match.group(0)

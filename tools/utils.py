@@ -41,7 +41,7 @@ def load_rules(md_file: str) -> dict:
  #       return ai_client.chat([{"role": "user", "content": prompt}])
 
 def generate_test_script(ai_client, feature_description):
-    keywords = ["policy", "page", "browser"]
+    keywords = ["policy", "page", "browser", "UI", "button"]
     if any(
     kw in item.get("step", "").lower()
     for item in feature_description
