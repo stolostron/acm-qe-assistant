@@ -1,6 +1,6 @@
 ## Analyse the failures
 
-- Use the tools/analyze_failed_case.py jenkins_url to get the failed cases when input the jenkins job link.
+- Use the tools/process_failed_case.py jenkins_url to get the failed cases when input the jenkins job link.
 - Understand the code architecture and Analyze the failed cases byself, provide the analysis result if it's product bug, automation bug or system issue.
 - Get the componment name from jenkins job link and following the component-keywords file then analyse these failed cases.
 - Then compare the analysis results between item2 and item3, if it's different, following item3 analysis result.

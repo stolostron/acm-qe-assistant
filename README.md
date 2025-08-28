@@ -100,7 +100,7 @@ export POLARION_API="https://polarion.engineering.redhat.com/polarion"
 export POLARION_PROJECT="RHACM4K" --- This is RHACM project
 export POLARION_TOKEN="xxx" 
 
-Note: You should have polarion certificate named "redhatcert.pem" in the directory so that connect the polarion.
+Note: If you export POLARION_USER and POLARION_PASSWORD, you should have polarion certificate named "redhatcert.pem" in the directory so that connect the polarion.
 ```
 4. Run App
 

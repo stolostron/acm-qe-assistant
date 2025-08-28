@@ -3,7 +3,7 @@ import sys
 
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from tools.get_result import get_error_message, get_failed_case_summary
+from tools.get_result_from_jenkins import get_error_message, get_failed_case_summary
 
 from agent import Agent
 from client import BedRockClient, GroqClient
