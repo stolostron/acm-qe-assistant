@@ -1,4 +1,4 @@
-import tools.get_result_from_jenkins as get_result_from_jenkins
+import get_result_from_jenkins
 import sys
 
 if len(sys.argv) > 1:
