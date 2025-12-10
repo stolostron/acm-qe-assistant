@@ -1,13 +1,16 @@
-groq==0.9.0
-python-dotenv==1.0.1
-rich==13.9.2
-openai==1.52.2
-pydantic==2.9.2
-agent-chat==0.1.1
-streamlit==1.41.1
-bs4==0.0.2
-instructor==1.7.2
-httpx==0.27.2
+# Dependencies for acm-qe-assistant
+#
+# Core dependencies (required for all usage methods):
+beautifulsoup4
 html5lib
 polarion==1.4.0
+requests
+python-dotenv
+certifi
+urllib3
+
+# Optional UI dependencies (only needed for Streamlit Web UI):
+# If you only use Claude Code or Gemini CLI, you can skip installing these
+streamlit==1.41.1
+httpx==0.27.2
 truststore
