@@ -18,13 +18,19 @@ git clone https://github.com/stolostron/acm-qe-assistant.git
 cd acm-qe-assistant
 ```
 
-2. Install full dependencies (including Streamlit UI):
+2. Install core dependencies first:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Set up environment variables in `.env` file:
+3. Install Streamlit-specific dependencies:
+
+```bash
+pip install streamlit==1.41.1 httpx==0.27.2 truststore
+```
+
+4. Set up environment variables in `.env` file:
 
 ```
 POLARION_API="https://polarion.engineering.redhat.com/polarion"
