@@ -40,6 +40,9 @@ def get_error_message(url):
               Each tuple is in the format (error_id, error_text).
     """
 
+    # Initialize final_results
+    final_results = []
+
     # Fetch the webpage content
     real_url = re.match(r"(.*?/\d+)(?:/|$)", url).group(0)
     webpage_content = fetch_webpage(real_url+"/testReport/")
@@ -94,7 +97,6 @@ def get_error_message(url):
                                error_dict[key] = {"error_text": "", "stacktrace_text": ""}
                             error_dict[key]["stacktrace_text"] = stack_text
         # print and return results
-        final_results = []
         #for item in results:
         #  if len(item) == 4:
         #    real_id, error_text, stack_text, real_id_con=item
