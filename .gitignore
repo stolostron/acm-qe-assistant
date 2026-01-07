@@ -2,3 +2,5 @@
 .vscode
 __pycache__
 .ipynb_*
+failure_analysis_report.html
+fix_recommendation.md
