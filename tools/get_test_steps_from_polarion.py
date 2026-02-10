@@ -15,34 +15,19 @@ def login_to_polarion(polarion_endpoint, polarion_user, polarion_password, polar
     :param polarion_password: The polarion login password
     :return: The polarion client object after a successful login
     """
-    try:
-        cwd = os.getcwd()
-        print(cwd)
-        logging.info('Checking connection to Polarion...')
-        if polarion_token:
-            logging.info("Logging in using token...")
-            polarion_client = polarion.Polarion(polarion_endpoint, "", "", polarion_token)
-        elif polarion_user and polarion_password:
-            polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password, "")
-        else:
-            raise ValueError("Either token or username/password must be provided.")
-       # polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password)
-        #polarion_client = polarion.Polarion(polarion_endpoint, "", "", polarion_token)
-        logging.info('Connection to Polarion OK.')
-        return polarion_client
-
-    except Exception:
-        logging.info('SSL Error. Adding custom certs to Certifi store...')
-        cafile = certifi.where()
-        with open(f"{cwd}/redhatcert.pem", 'rb') as infile:
-            customca = infile.read()
-        with open(cafile, 'ab') as outfile:
-            outfile.write(customca)
-        logging.info('That might have worked.')
-        # Retry once after cert patch
+    cwd = os.getcwd()
+    print(cwd)
+    logging.info('Checking connection to Polarion...')
+    if polarion_token:
+        logging.info("Logging in using token...")
+        polarion_client = polarion.Polarion(polarion_endpoint, "", "", polarion_token)
+    elif polarion_user and polarion_password:
         polarion_client = polarion.Polarion(polarion_endpoint, polarion_user, polarion_password, "")
-        logging.info('Connection to Polarion OK.')
-        return polarion_client
+    else:
+        raise ValueError("Either token or username/password must be provided.")
+
+    logging.info('Connection to Polarion OK.')
+    return polarion_client
 
 
 def get_test_case_by_id(polarion_client, project_id, case_id):
