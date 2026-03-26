@@ -51,6 +51,36 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
+def load_env_file():
+    """Load variables from .env file in project root if it exists."""
+    # Search for .env file: current directory, then script directory
+    env_paths = [
+        os.path.join(os.getcwd(), '.env'),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env'),
+    ]
+    for env_path in env_paths:
+        env_path = os.path.normpath(env_path)
+        if os.path.isfile(env_path):
+            with open(env_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    # Remove 'export ' prefix if present
+                    if line.startswith('export '):
+                        line = line[7:]
+                    if '=' in line:
+                        key, value = line.split('=', 1)
+                        key = key.strip()
+                        value = value.strip().strip('"').strip("'")
+                        # Only set if not already in environment
+                        if key not in os.environ:
+                            os.environ[key] = value
+            print(f"   Loaded environment from: {env_path}")
+            return True
+    return False
+
+
 # Component to test repository mapping
 COMPONENT_TEST_REPOS = {
     'global-hub': {
@@ -1636,8 +1666,29 @@ class UnifiedPRTestSelector:
                             pr_count: int = 1, selected_tests: List[Dict] = None):
         """Trigger Jenkins job with parameters"""
 
+        # Auto-load .env file if Jenkins vars are not set
+        if not self.jenkins_url or not os.getenv('JENKINS_USER') or not os.getenv('JENKINS_TOKEN'):
+            print("\n🔍 Looking for Jenkins variables in .env file...")
+            load_env_file()
+            # Refresh jenkins_url from environment after loading .env
+            if not self.jenkins_url:
+                self.jenkins_url = os.getenv('JENKINS_URL')
+
+        # Prompt user for any still-missing variables
+        missing_vars = []
         if not self.jenkins_url:
-            print("⚠️  Jenkins URL not configured, skipping trigger")
+            missing_vars.append('JENKINS_URL')
+        if not os.getenv('JENKINS_USER'):
+            missing_vars.append('JENKINS_USER')
+        if not os.getenv('JENKINS_TOKEN'):
+            missing_vars.append('JENKINS_TOKEN')
+
+        if missing_vars:
+            print(f"\n⚠️  Missing Jenkins variables: {', '.join(missing_vars)}")
+            print(f"   Please set them in your .env file or as environment variables:")
+            for var in missing_vars:
+                print(f"     export {var}=\"your-value\"")
+            print(f"\n   Or create a .env file with these variables in the project root.")
             return
 
         # Use default job name if not specified
@@ -1662,9 +1713,9 @@ class UnifiedPRTestSelector:
         else:
             tags_ginkgo = ''
 
-        # For global-hub, only set TEST_TAGS parameter
+        # For global-hub, set TEST_TAGS and keep user-provided parameters
         if component == 'global-hub':
-            parameters = {'TEST_TAGS': tags_ginkgo}
+            parameters['TEST_TAGS'] = tags_ginkgo
         else:
             # Replace TEST_TAGS:auto with actual tags for other components
             if 'TEST_TAGS' in parameters and parameters['TEST_TAGS'] == 'auto':
